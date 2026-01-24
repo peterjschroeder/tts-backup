@@ -70,6 +70,9 @@ def seekURL(dic, trail=[]):
             # (yikes).
             v = re.sub(r"{.*}", "", v)
 
+            # Fix for Steam CDN urls
+            v = v.replace('http://cloud-3.steamusercontent.com/', 'https://steamusercontent-a.akamaihd.net/')
+
             yield (newtrail, v)
 
 
