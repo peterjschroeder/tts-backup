@@ -42,7 +42,8 @@ def seekURL(dic, trail=[]):
                 try:
                     # It appears that AudioLibrary items are mappings of form
                     # “Item1” → URL, “Item2” → audio title.
-                    yield (newtrail, elem["Item1"])
+                    # Fix for Steam CDN urls
+                    yield (newtrail, elem["Item1"].replace('http://cloud-3.steamusercontent.com/', 'https://steamusercontent-a.akamaihd.net/'))
                 except KeyError:
                     raise NotImplementedError(
                         "AudioLibrary has unexpected structure: {}".format(v)
