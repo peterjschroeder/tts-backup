@@ -42,8 +42,8 @@ def seekURL(dic, trail=[]):
                 try:
                     # It appears that AudioLibrary items are mappings of form
                     # “Item1” → URL, “Item2” → audio title.
-                    # Fix for Steam CDN urls
-                    yield (newtrail, elem["Item1"].replace('http://cloud-3.steamusercontent.com/', 'https://steamusercontent-a.akamaihd.net/'))
+                    # Fix for Steam CDN and old pastebin urls
+                    yield (newtrail, elem["Item1"].replace('http://cloud-3.steamusercontent.com/', 'https://steamusercontent-a.akamaihd.net/').replace('https://pastebin.com/raw.php?i=', 'https://pastebin.com/raw/'))
                 except KeyError:
                     raise NotImplementedError(
                         "AudioLibrary has unexpected structure: {}".format(v)
@@ -71,8 +71,8 @@ def seekURL(dic, trail=[]):
             # (yikes).
             v = re.sub(r"{.*}", "", v)
 
-            # Fix for Steam CDN urls
-            v = v.replace('http://cloud-3.steamusercontent.com/', 'https://steamusercontent-a.akamaihd.net/')
+            # Fix for Steam CDN and old pastebin urls
+            v = v.replace('http://cloud-3.steamusercontent.com/', 'https://steamusercontent-a.akamaihd.net/').replace('https://pastebin.com/raw.php?i=', 'https://pastebin.com/raw/')
 
             yield (newtrail, v)
 
