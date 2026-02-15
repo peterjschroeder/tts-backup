@@ -56,8 +56,7 @@ def seekURL(dic, trail=[]):
             for elem in v:
                 if not isinstance(elem, dict):
                     continue
-                # Fix for Steam CDN and old pastebin urls
-                yield from seekURL(elem.replace('http://cloud-3.steamusercontent.com/', 'https://steamusercontent-a.akamaihd.net/').replace('https://pastebin.com/raw.php?i=', 'https://pastebin.com/raw/'), newtrail)
+                yield from seekURL(elem, newtrail)
 
         elif k.lower().endswith("url"):
             # We don’t want tablet URLs.
